@@ -1,7 +1,7 @@
 package com.sabzishoppidriverapp.model;
 
 
-import com.sabzishoppidriverapp.model.login_responce.LoginModel;
+import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 
 /**
  * Created by Natraj on 7/11/2017.
@@ -9,13 +9,13 @@ import com.sabzishoppidriverapp.model.login_responce.LoginModel;
 
 public class User {
 
-    public static LoginModel user;
+    public static OtpModel user;
 
-    public static LoginModel getUser() {
+    public static OtpModel getUser() {
         return user;
     }
 
-    public static void setUser(LoginModel user) {
+    public static void setUser(OtpModel user) {
         User.user = user;
     }
 }

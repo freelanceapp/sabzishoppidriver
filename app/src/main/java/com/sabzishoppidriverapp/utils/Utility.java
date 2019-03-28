@@ -8,16 +8,6 @@ import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-
-import ibt.sabzishoppee.R;
-import ibt.sabzishoppee.database.DatabaseHandler;
-import ibt.sabzishoppee.database.HelperManager;
-import ibt.sabzishoppee.model.ProductDetail;
-import ibt.sabzishoppee.ui.activity.CheckOutActivity;
-import ibt.sabzishoppee.ui.activity.HomeActivity;
 
 
 public class Utility {
@@ -25,7 +15,7 @@ public class Utility {
     private static ProgressDialog dialog;
 
     public static void loadImage(Context ctx, ImageView imageView, String url) {
-        Picasso.get().load(url).into(imageView);
+       // Picasso.get().load(url).into(imageView);
     }
 
     /*public static void loadSpeakerImage(Context ctx, ImageView imageView, String url) {
@@ -36,24 +26,13 @@ public class Utility {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 
-    public static void setFragment(Fragment fragment, Context ctx, String tag) {
-        ((HomeActivity) ctx).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, tag).commit();
-    }
 
-   public static void setFragment1(Fragment fragment, Context ctx, String tag) {
-        ((CheckOutActivity) ctx).getSupportFragmentManager().beginTransaction().replace(R.id.viewpager, fragment).addToBackStack(null).commit();
-    }
-
-
-    public static void setFragment2(Fragment fragment, Context ctx, String tag) {
-        ((CheckOutActivity) ctx).getSupportFragmentManager().beginTransaction().replace(R.id.viewpager, fragment).commit();
-    }
 
    /* public static void setProfileFragment(Fragment fragment, Context ctx) {
         ((MainActivity) ctx).getSupportFragmentManager().beginTransaction().replace(R.id.fl_myprofile, fragment).commit();
     }*/
 
-    public static String getTotal(HelperManager helperManager) {
+   /* public static String getTotal(HelperManager helperManager) {
         float total = 0;
         float round_total = 0;
         ArrayList<ProductDetail> total_list = helperManager.readAllCart();
@@ -79,7 +58,7 @@ public class Utility {
             round_total = Math.round(total);
         }
         return String.valueOf(round_total);
-    }
+    }*/
 
     public static void showLoader(Context ctx) {
         dialog = new ProgressDialog(ctx);

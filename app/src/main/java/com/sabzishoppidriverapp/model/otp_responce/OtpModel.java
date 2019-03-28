@@ -1,16 +1,13 @@
 
-package com.sabzishoppidriverapp.model.order_history_responce;
+package com.sabzishoppidriverapp.model.otp_responce;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class OrderHistoryModel implements Parcelable
+public class OtpModel implements Parcelable
 {
 
     @SerializedName("error")
@@ -19,33 +16,33 @@ public class OrderHistoryModel implements Parcelable
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("Order")
+    @SerializedName("driver")
     @Expose
-    private List<Order> order = new ArrayList<Order>();
-    public final static Creator<OrderHistoryModel> CREATOR = new Creator<OrderHistoryModel>() {
+    private Driver driver;
+    public final static Creator<OtpModel> CREATOR = new Creator<OtpModel>() {
 
 
         @SuppressWarnings({
             "unchecked"
         })
-        public OrderHistoryModel createFromParcel(Parcel in) {
-            return new OrderHistoryModel(in);
+        public OtpModel createFromParcel(Parcel in) {
+            return new OtpModel(in);
         }
 
-        public OrderHistoryModel[] newArray(int size) {
-            return (new OrderHistoryModel[size]);
+        public OtpModel[] newArray(int size) {
+            return (new OtpModel[size]);
         }
 
     }
     ;
 
-    protected OrderHistoryModel(Parcel in) {
+    protected OtpModel(Parcel in) {
         this.error = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.order, (Order.class.getClassLoader()));
+        this.driver = ((Driver) in.readValue((Driver.class.getClassLoader())));
     }
 
-    public OrderHistoryModel() {
+    public OtpModel() {
     }
 
     public Boolean getError() {
@@ -56,7 +53,7 @@ public class OrderHistoryModel implements Parcelable
         this.error = error;
     }
 
-    public OrderHistoryModel withError(Boolean error) {
+    public OtpModel withError(Boolean error) {
         this.error = error;
         return this;
     }
@@ -69,28 +66,28 @@ public class OrderHistoryModel implements Parcelable
         this.message = message;
     }
 
-    public OrderHistoryModel withMessage(String message) {
+    public OtpModel withMessage(String message) {
         this.message = message;
         return this;
     }
 
-    public List<Order> getOrder() {
-        return order;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setOrder(List<Order> order) {
-        this.order = order;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public OrderHistoryModel withOrder(List<Order> order) {
-        this.order = order;
+    public OtpModel withDriver(Driver driver) {
+        this.driver = driver;
         return this;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(error);
         dest.writeValue(message);
-        dest.writeList(order);
+        dest.writeValue(driver);
     }
 
     public int describeContents() {

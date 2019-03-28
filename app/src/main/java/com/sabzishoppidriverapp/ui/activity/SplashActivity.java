@@ -10,6 +10,7 @@ import com.sabzishoppidriverapp.R;
 import com.sabzishoppidriverapp.constant.Constant;
 import com.sabzishoppidriverapp.model.User;
 import com.sabzishoppidriverapp.model.login_responce.LoginModel;
+import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 import com.sabzishoppidriverapp.utils.AppPreference;
 import com.sabzishoppidriverapp.utils.BaseActivity;
 import com.sabzishoppidriverapp.utils.ConnectionDirector;
@@ -31,7 +32,7 @@ public class SplashActivity extends BaseActivity {
                     if (AppPreference.getBooleanPreference(mContext , Constant.Is_Login)) {
                         Gson gson = new Gson();
                         String userData = AppPreference.getStringPreference(mContext, Constant.User_Data);
-                        LoginModel loginModal = gson.fromJson(userData, LoginModel.class);
+                        OtpModel loginModal = gson.fromJson(userData, OtpModel.class);
                         User.setUser(loginModal);
 
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);

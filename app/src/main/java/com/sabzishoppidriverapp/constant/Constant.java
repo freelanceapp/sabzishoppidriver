@@ -2,10 +2,10 @@ package com.sabzishoppidriverapp.constant;
 
 public class Constant {
     public static final String NEWPOST_API = "name.php";
-    public static final String BASE_URL = "http://sabzishopppe.codeencrypt.in/";
+    public static final String BASE_URL = "http://freshveggie.infobitetechnology.tech/";
     public static final String IMAGE_BASE_URL = "http://kumarlifesciences.com/images/insert_gallery/";
     public static final String SIGNUP_API = "/api/user-signup.php";
-    public static final String LOGIN_API = "api/user-login.php";
+    public static final String LOGIN_API = "api/driver_login.php";
     public static final String PRODUCTS_API = "api/select-product.php";
     public static final String PRODUCTS_DETAIL_API = "api/select-product-details.php";
     public static final String GALLERY_API = "kls-api/gallery.php";
@@ -15,7 +15,7 @@ public class Constant {
     public static final String SEARCH_API = "kls-api/search-product.php";
     public static final String ORDER_API = "kls-api/order.php";
     public static final String FORGOT_PASSWORD_API = "api/user-forget-password.php";
-    public static final String OTP_API = "api/user-contact-verification.php";
+    public static final String OTP_API = "api/driver_otp_verification.php";
     public static final String SUPPORT = "api/app_token.php";
     public static final String PROFILE = "api/user-profile.php";
     public static final String UPDATE_PROFILE = "api/user-profile-update.php";

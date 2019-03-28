@@ -3,7 +3,7 @@ package com.sabzishoppidriverapp.model.login_responce;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,14 +16,11 @@ public class LoginModel implements Parcelable
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("user")
-    @Expose
-    private User user;
-    public final static Creator<LoginModel> CREATOR = new Creator<LoginModel>() {
+    public final static Parcelable.Creator<LoginModel> CREATOR = new Creator<LoginModel>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public LoginModel createFromParcel(Parcel in) {
             return new LoginModel(in);
@@ -34,12 +31,11 @@ public class LoginModel implements Parcelable
         }
 
     }
-    ;
+            ;
 
     protected LoginModel(Parcel in) {
         this.error = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
-        this.user = ((User) in.readValue((User.class.getClassLoader())));
     }
 
     public LoginModel() {
@@ -71,27 +67,13 @@ public class LoginModel implements Parcelable
         return this;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public LoginModel withUser(User user) {
-        this.user = user;
-        return this;
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(error);
         dest.writeValue(message);
-        dest.writeValue(user);
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

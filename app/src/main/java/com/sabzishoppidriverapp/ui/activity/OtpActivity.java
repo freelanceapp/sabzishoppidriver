@@ -14,9 +14,13 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sabzishoppidriverapp.R;
+import com.sabzishoppidriverapp.constant.Constant;
+import com.sabzishoppidriverapp.model.User;
+import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 import com.sabzishoppidriverapp.retrofit_provider.RetrofitService;
 import com.sabzishoppidriverapp.retrofit_provider.WebResponse;
 import com.sabzishoppidriverapp.utils.Alerts;
+import com.sabzishoppidriverapp.utils.AppPreference;
 import com.sabzishoppidriverapp.utils.BaseActivity;
 import com.sabzishoppidriverapp.utils.ConnectionDirector;
 import com.sabzishoppidriverapp.utils.pinview.Pinview;
@@ -82,40 +86,40 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    /*private void otpApi() {
+    private void otpApi() {
         if (cd.isNetWorkAvailable()) {
             //strMobile = ((EditText) rootview.findViewById(R.id.et_login_email)).getText().toString();
             strOtp = pinview1.getValue();
 
-                RetrofitService.getLoginData(new Dialog(mContext), retrofitApiClient.otpApi(strMobile, strOtp), new WebResponse() {
-                    @Override
-                    public void onResponseSuccess(Response<?> result) {
-                        LoginModel loginModel = (LoginModel) result.body();
+            RetrofitService.getOtpData(new Dialog(mContext), retrofitApiClient.otpApi(strMobile, strOtp), new WebResponse() {
+                @Override
+                public void onResponseSuccess(Response<?> result) {
+                    OtpModel loginModel = (OtpModel) result.body();
 
-                        if (!loginModel.getError())
-                        {
-                            Alerts.show(mContext, loginModel.getMessage());
+                    if (!loginModel.getError())
+                    {
+                        Alerts.show(mContext, loginModel.getMessage());
 
-                            AppPreference.setBooleanPreference(mContext, Constant.LOGIN_API , true);
-                            AppPreference.setStringPreference(mContext, Constant.User_Id , loginModel.getUser().getId());
+                        AppPreference.setBooleanPreference(mContext, Constant.LOGIN_API , true);
+                        AppPreference.setStringPreference(mContext, Constant.User_Id , loginModel.getDriver().getDriverId());
 
-                            Gson gson = new GsonBuilder().setLenient().create();
-                            String data = gson.toJson(loginModel);
-                            AppPreference.setStringPreference(mContext, Constant.User_Data, data);
-                            User.setUser(loginModel);
-                            Intent intent = new Intent(mContext , HomeActivity.class);
-                            mContext.startActivity(intent);
-                        }
+                        Gson gson = new GsonBuilder().setLenient().create();
+                        String data = gson.toJson(loginModel);
+                        AppPreference.setStringPreference(mContext, Constant.User_Data, data);
+                        User.setUser(loginModel);
+                        Intent intent = new Intent(mContext , MainActivity.class);
+                        mContext.startActivity(intent);
                     }
+                }
 
-                    @Override
-                    public void onResponseFailed(String error) {
-                        Alerts.show(mContext, error);
-                    }
-                });
+                @Override
+                public void onResponseFailed(String error) {
+                    Alerts.show(mContext, error);
+                }
+            });
 
         }else {
             cd.show(mContext);
         }
-    }*/
+    }
 }
