@@ -157,12 +157,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
-            PolylineOptions lineOptions = null;
+            PolylineOptions lineOptions = new PolylineOptions();
             MarkerOptions markerOptions = new MarkerOptions();
 
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList();
-                lineOptions = new PolylineOptions();
+                //lineOptions = new PolylineOptions();
 
                 List<HashMap<String, String>> path = result.get(i);
 
@@ -183,7 +183,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
 
-// Drawing polyline in the Google Map for the i-th route
+            // Drawing polyline in the Google Map for the i-th route
             mMap.addPolyline(lineOptions);
         }
     }
