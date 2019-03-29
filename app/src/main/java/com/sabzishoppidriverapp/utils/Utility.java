@@ -4,10 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 
 
 public class Utility {
@@ -15,7 +13,7 @@ public class Utility {
     private static ProgressDialog dialog;
 
     public static void loadImage(Context ctx, ImageView imageView, String url) {
-       // Picasso.get().load(url).into(imageView);
+        // Picasso.get().load(url).into(imageView);
     }
 
     /*public static void loadSpeakerImage(Context ctx, ImageView imageView, String url) {
@@ -25,12 +23,6 @@ public class Utility {
     public static void toastView(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
-
-
-
-   /* public static void setProfileFragment(Fragment fragment, Context ctx) {
-        ((MainActivity) ctx).getSupportFragmentManager().beginTransaction().replace(R.id.fl_myprofile, fragment).commit();
-    }*/
 
    /* public static String getTotal(HelperManager helperManager) {
         float total = 0;

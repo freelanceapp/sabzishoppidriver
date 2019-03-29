@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "891997259459",
+    "firebase_url": "https://sabzishoppidriver.firebaseio.com",
+    "project_id": "sabzishoppidriver",
+    "storage_bucket": "sabzishoppidriver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891997259459:android:b7c39e23c9b37844",
+        "android_client_info": {
+          "package_name": "com.sabzishoppidriverapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891997259459-9keloqhvsbq7hst6di36lhc8nnuekfl6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabzishoppidriverapp",
+            "certificate_hash": "6d9b846d9ea1d7eb3bb83ed18d22ebcbb15f6d0f"
+          }
+        },
+        {
+          "client_id": "891997259459-kttnoi8bqfp3nr362s8i11n0vc9q3o2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgqFupjWIVX-4svwAe6fxo35MzT4YyghU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891997259459-kttnoi8bqfp3nr362s8i11n0vc9q3o2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
