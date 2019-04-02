@@ -80,7 +80,7 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
 
         switch (view.getId()){
             case R.id.btn_fplogin:
-               // otpApi();
+                otpApi();
                 //startFragment(Constant.SignUpFragment,new SignUpFragment());
                 break;
         }

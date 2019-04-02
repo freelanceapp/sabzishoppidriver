@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         et_login_phone = findViewById(R.id.et_login_phone);
 
         btn_login.setOnClickListener(this);
-        strMobile = et_login_phone.getText().toString();
+
     }
 
     @Override
@@ -46,7 +46,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (view.getId())
         {
             case R.id.btn_login :
-                if (!strMobile.isEmpty()) {
+                strMobile = et_login_phone.getText().toString();
+                if (strMobile.length() == 10) {
                     otpApi();
                 }else {
                     Alerts.show(mContext,"Enter Mobile Number");
