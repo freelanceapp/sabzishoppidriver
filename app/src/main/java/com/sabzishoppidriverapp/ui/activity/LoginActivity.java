@@ -42,6 +42,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.btn_login:
                 strMobile = et_login_phone.getText().toString();

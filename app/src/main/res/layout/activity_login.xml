@@ -44,7 +44,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:maxLength="12"
+            android:maxLength="10"
             android:textStyle="normal"
             android:background="@drawable/bg_layout1"/>
 

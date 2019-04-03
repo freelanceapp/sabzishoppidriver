@@ -1,35 +1,39 @@
 {
   "project_info": {
-    "project_number": "891997259459",
-    "firebase_url": "https://sabzishoppidriver.firebaseio.com",
-    "project_id": "sabzishoppidriver",
-    "storage_bucket": "sabzishoppidriver.appspot.com"
+    "project_number": "991106775643",
+    "firebase_url": "https://sabzishoppidriverapp.firebaseio.com",
+    "project_id": "sabzishoppidriverapp",
+    "storage_bucket": "sabzishoppidriverapp.appspot.com"
+
+
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:891997259459:android:b7c39e23c9b37844",
+        "mobilesdk_app_id": "1:991106775643:android:b7c39e23c9b37844",
+
         "android_client_info": {
           "package_name": "com.sabzishoppidriverapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "891997259459-9keloqhvsbq7hst6di36lhc8nnuekfl6.apps.googleusercontent.com",
+          "client_id": "991106775643-urkugvs1tcdsn59q87bktr9v3fljul5f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sabzishoppidriverapp",
-            "certificate_hash": "6d9b846d9ea1d7eb3bb83ed18d22ebcbb15f6d0f"
+            "certificate_hash": "af6e7a438225bb46c5ab7585a31fb59ee4c135dd"
           }
         },
         {
-          "client_id": "891997259459-kttnoi8bqfp3nr362s8i11n0vc9q3o2s.apps.googleusercontent.com",
+          "client_id": "991106775643-vd6d5059nslm6u96pjnqi52tc5f9ste3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBgqFupjWIVX-4svwAe6fxo35MzT4YyghU"
+          "current_key": "AIzaSyAqxeYdfbhelbXc7lEpes8wtDPoe8S90xI"
+
         }
       ],
       "services": {
@@ -40,7 +44,8 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "891997259459-kttnoi8bqfp3nr362s8i11n0vc9q3o2s.apps.googleusercontent.com",
+              "client_id": "991106775643-vd6d5059nslm6u96pjnqi52tc5f9ste3.apps.googleusercontent.com",
+
               "client_type": 3
             }
           ]
