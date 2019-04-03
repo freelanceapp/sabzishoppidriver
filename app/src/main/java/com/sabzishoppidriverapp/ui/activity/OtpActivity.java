@@ -2,12 +2,10 @@ package com.sabzishoppidriverapp.ui.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +32,8 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
     private TextView otpTime;
     private LinearLayout resendLayout;
     private Pinview pinview1;
-    private String strMobile , strOtp;
+    private String strMobile, strOtp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,22 +42,20 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         mContext = this;
         cd = new ConnectionDirector(mContext);
         retrofitApiClient = RetrofitService.getRetrofit();
         strMobile = getIntent().getStringExtra("Mobile_Number");
 
-        ((Button)findViewById(R.id.btn_fplogin)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_fplogin)).setOnClickListener(this);
         btn_fplogin = findViewById(R.id.btn_fplogin);
         pinview1 = findViewById(R.id.pinview1);
-        otpTime = (TextView)findViewById(R.id.otpTime);
+        otpTime = (TextView) findViewById(R.id.otpTime);
         resendLayout = (LinearLayout) findViewById(R.id.resendLayout);
         btn_fplogin.setOnClickListener(this);
 
         otptime();
-
     }
 
 
@@ -79,7 +76,7 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_fplogin:
                 otpApi();
                 //startFragment(Constant.SignUpFragment,new SignUpFragment());
@@ -97,19 +94,19 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
                 public void onResponseSuccess(Response<?> result) {
                     OtpModel loginModel = (OtpModel) result.body();
 
-                    if (!loginModel.getError())
-                    {
+                    if (!loginModel.getError()) {
                         Alerts.show(mContext, loginModel.getMessage());
 
-                        AppPreference.setBooleanPreference(mContext, Constant.LOGIN_API , true);
-                        AppPreference.setStringPreference(mContext, Constant.User_Id , loginModel.getDriver().getDriverId());
+                        AppPreference.setBooleanPreference(mContext, Constant.Is_Login, true);
+                        AppPreference.setStringPreference(mContext, Constant.User_Id, loginModel.getDriver().getDriverId());
 
                         Gson gson = new GsonBuilder().setLenient().create();
                         String data = gson.toJson(loginModel);
                         AppPreference.setStringPreference(mContext, Constant.User_Data, data);
                         User.setUser(loginModel);
-                        Intent intent = new Intent(mContext , MainActivity.class);
+                        Intent intent = new Intent(mContext, MapsActivity.class);
                         mContext.startActivity(intent);
+                        finish();
                     }
                 }
 
@@ -119,7 +116,7 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
                 }
             });
 
-        }else {
+        } else {
             cd.show(mContext);
         }
     }

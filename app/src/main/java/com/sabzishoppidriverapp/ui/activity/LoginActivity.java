@@ -2,7 +2,6 @@ package com.sabzishoppidriverapp.ui.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +23,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btn_login;
     private EditText et_login_phone;
     private String strMobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +32,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         btn_login = findViewById(R.id.btn_login);
         et_login_phone = findViewById(R.id.et_login_phone);
 
@@ -43,48 +42,47 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.btn_login :
+
+        switch (view.getId()) {
+            case R.id.btn_login:
                 strMobile = et_login_phone.getText().toString();
-                if (strMobile.length() == 10) {
+                if (!strMobile.isEmpty()) {
                     otpApi();
-                }else {
-                    Alerts.show(mContext,"Enter Mobile Number");
+                } else {
+                    Alerts.show(mContext, "Enter Mobile Number");
                 }
                 break;
         }
     }
 
-
-     private void otpApi() {
+    private void otpApi() {
         if (cd.isNetWorkAvailable()) {
             //strMobile = ((EditText) rootview.findViewById(R.id.et_login_email)).getText().toString();
 
-                RetrofitService.getLoginData(new Dialog(mContext), retrofitApiClient.loginData(strMobile), new WebResponse() {
-                    @Override
-                    public void onResponseSuccess(Response<?> result) {
-                        LoginModel loginModel = (LoginModel) result.body();
+            RetrofitService.getLoginData(new Dialog(mContext), retrofitApiClient.loginData(strMobile), new WebResponse() {
+                @Override
+                public void onResponseSuccess(Response<?> result) {
+                    LoginModel loginModel = (LoginModel) result.body();
 
-                        if (!loginModel.getError())
-                        {
-                            Alerts.show(mContext, loginModel.getMessage());
+                    if (!loginModel.getError()) {
+                        Alerts.show(mContext, loginModel.getMessage());
 
-                            AppPreference.setBooleanPreference(mContext, Constant.LOGIN_API , true);
-                            //AppPreference.setStringPreference(mContext, Constant.User_Id , loginModel.getUser().getId());
-                            Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
-                            intent.putExtra("Mobile_Number", strMobile);
-                            mContext.startActivity(intent);
-                        }
+                        AppPreference.setBooleanPreference(mContext, Constant.LOGIN_API, true);
+                        //AppPreference.setStringPreference(mContext, Constant.User_Id , loginModel.getUser().getId());
+                        Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
+                        intent.putExtra("Mobile_Number", strMobile);
+                        mContext.startActivity(intent);
+                        finish();
                     }
+                }
 
-                    @Override
-                    public void onResponseFailed(String error) {
-                        Alerts.show(mContext, error);
-                    }
-                });
+                @Override
+                public void onResponseFailed(String error) {
+                    Alerts.show(mContext, error);
+                }
+            });
 
-        }else {
+        } else {
             cd.show(mContext);
         }
     }
