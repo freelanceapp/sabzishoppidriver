@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList();
-                //lineOptions = new PolylineOptions();
+                lineOptions = new PolylineOptions();
 
                 List<HashMap<String, String>> path = result.get(i);
 

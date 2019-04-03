@@ -19,6 +19,7 @@ import com.sabzishoppidriverapp.model.User;
 import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 import com.sabzishoppidriverapp.retrofit_provider.RetrofitService;
 import com.sabzishoppidriverapp.retrofit_provider.WebResponse;
+import com.sabzishoppidriverapp.ui.map_activity.MapsActivity;
 import com.sabzishoppidriverapp.utils.Alerts;
 import com.sabzishoppidriverapp.utils.AppPreference;
 import com.sabzishoppidriverapp.utils.BaseActivity;

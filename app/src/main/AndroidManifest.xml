@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".ui.activity.OtpActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.map_activity.MapsActivity">
         </activity>
 
         <meta-data
