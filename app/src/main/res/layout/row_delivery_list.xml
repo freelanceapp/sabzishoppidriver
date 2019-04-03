@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtOrderLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order No."
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_e"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtOrderNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtOrderLbl"
+                    android:text="OrederNumber"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_a"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/imgCustomerInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_info" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtHouseLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="House no.:"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_e"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtHouseNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtHouseLbl"
+                    android:text="128 B"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtDistanceLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Distance:"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_e"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDistanceLbl"
+                    android:layout_alignParentRight="true"
+                    android:text="0.5 km"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Landmark:"
+                android:textAllCaps="true"
+                android:textColor="@color/text_color_e"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtLandmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Near Tulsi tower"
+                android:textColor="@color/text_color_c"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Shipping Address:"
+                android:textAllCaps="true"
+                android:textColor="@color/text_color_e"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LG-62, 18, Mahatma Gandhi Rd, Trade Centre, South Tukoganj, Indore, Madhya Pradesh 452001, India"
+                android:textColor="@color/text_color_c"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtPayLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Payment Type:"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_h"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtPaymentType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPayLbl"
+                android:text="Paytm"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgNext"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_chevron_right" />
+
+            <TextView
+                android:id="@+id/txtAmountLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:text="Amount:"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_h"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAmountLbl"
+                android:layout_alignParentEnd="true"
+                android:text="Rs. 180"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

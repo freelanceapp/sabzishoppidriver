@@ -7,12 +7,18 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +29,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sabzishoppidriverapp.R;
+import com.sabzishoppidriverapp.model.delivery_list_modal.DeliveryList;
+import com.sabzishoppidriverapp.utils.Alerts;
 import com.sabzishoppidriverapp.utils.AppProgressDialog;
 import com.sabzishoppidriverapp.utils.BaseActivity;
 import com.sabzishoppidriverapp.utils.GpsTracker;
@@ -37,8 +45,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
+public class MapsActivity extends BaseActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    private DeliveryList deliveryData;
+
+    private static final long INTERVAL = 1000 * 10;
+    private static final long FASTEST_INTERVAL = 1000 * 5;
+
+    private LatLng latLngPick;
     private double endLatitude = 0.0;
     private double endLongitude = 0.0;
     private double startLatitude = 0.0;
@@ -62,12 +77,13 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         init();
+
     }
 
     private void init() {
         dialog = new Dialog(mContext);
+        deliveryData = getIntent().getParcelableExtra("delivery_data");
         getLatLong();
     }
 
@@ -75,14 +91,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Alerts.show(mContext, "Please enable location permission...!!!");
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -92,31 +104,37 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLngPick) {
-                MarkerOptions markerOptions = new MarkerOptions();
-                if (startLatitude == 0) {
-                    startLatitude = latLngPick.latitude;
-                    startLongitude = latLngPick.longitude;
-                    latLngPick = new LatLng(startLatitude, startLongitude);
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                } else if (endLatitude == 0) {
-                    endLatitude = latLngPick.latitude;
-                    endLongitude = latLngPick.longitude;
-                    latLngPick = new LatLng(endLatitude, endLongitude);
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                }
 
-                markerOptions.position(latLngPick);
-                //markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-                //mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLngPick));
-                mMap.addMarker(markerOptions);
-
-                if (startLatitude > 0 && endLatitude > 0) {
-                    mainUrl = makeURL(startLatitude, startLongitude, endLatitude, endLongitude);
-                    new connectAsyncTask().execute(mainUrl);
-                }
             }
         });
+
+        if (latitude > 0) {
+            LatLng latLng = new LatLng(latitude, longitude);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
+            mMap.animateCamera(cameraUpdate);
+        }
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        endLatitude = Double.parseDouble(deliveryData.getLati());
+        endLongitude = Double.parseDouble(deliveryData.getLang());
+
+        /*endLatitude = 22.7820662;
+        endLongitude = 75.8579348;*/
+
+        startLatitude = latitude;
+        startLongitude = longitude;
+
+        latLngPick = new LatLng(endLatitude, endLongitude);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        markerOptions.position(latLngPick);
+        //mMap.animateCamera(CameraUpdateFactory.newLatLng(latLngPick));
+        markerOptions.title(deliveryData.getCustomer().getCustomerName() + "\n" + deliveryData.getCustomer().getCustomerContact());
+        mMap.addMarker(markerOptions);
+
+        if (startLatitude > 0 && endLatitude > 0) {
+            mainUrl = makeURL(startLatitude, startLongitude, endLatitude, endLongitude);
+            new connectAsyncTask().execute(mainUrl);
+        }
     }
 
     private void getLatLong() {
@@ -134,11 +152,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             if (addresses.size() > 0) {
                 AppProgressDialog.hide(dialog);
-                //address_et.setText(addresses.get(0).getAddressLine(0));
-                //((EditText) findViewById(R.id.edtCity)).setText(addresses.get(0).getLocality());
-                //((EditText) findViewById(R.id.edtState)).setText(addresses.get(0).getAdminArea());
-                //country_et.setText(addresses.get(0).getCountryName());
-                //zipcode_et.setText(addresses.get(0).getPostalCode());
             } else {
                 AppProgressDialog.show(dialog);
                 new Handler().postDelayed(new Runnable() {
@@ -166,7 +179,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         urlString.append(",");
         urlString.append(Double.toString(endLong));
         urlString.append("&sensor=false&mode=driving&alternatives=true");
-        urlString.append("&key=AIzaSyBM9JfnMJy5hQ9isCJr9u09E7s4uVx9Ebc");
+        urlString.append("&key=" + getResources().getString(R.string.map_api));
         return urlString.toString();
     }
 
@@ -261,4 +274,29 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
         return poly;
     }
+
+    /****************************************************************************/
+    /*
+     * Location update
+     * */
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
 }

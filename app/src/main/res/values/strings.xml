@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">SabzishoppiDriverApp</string>
+    <string name="app_name">Sabzi-Shoppi</string>
+
+    <string name="map_api">AIzaSyBwhwpxhz_rq-Qe9JnHgpxvM-ujbkrvDn4</string>
+
     <string name="connection">no internet</string>
     <string name="title_activity_map_tracking">Map Route Tracking</string>
     <string name="track_path_on_map">Walk and route your path on map</string>

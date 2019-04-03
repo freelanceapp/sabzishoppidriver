@@ -2,9 +2,9 @@ package com.sabzishoppidriverapp.retrofit_provider;
 
 
 import com.sabzishoppidriverapp.constant.Constant;
+import com.sabzishoppidriverapp.model.delivery_list_modal.DeliveryListMainModal;
 import com.sabzishoppidriverapp.model.login_responce.LoginModel;
 import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
-
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -12,7 +12,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -38,9 +37,14 @@ public interface RetrofitApiClient {
     @FormUrlEncoded
     @POST(Constant.CONTACT_US)
     Call<ResponseBody> contactUs(@Field("name") String name, @Field("email") String email,
-                                 @Field("mobile_no") String mobile_no, @Field("subject") String subject
-            , @Field("message") String message);
+                                 @Field("mobile_no") String mobile_no, @Field("subject") String subject,
+                                 @Field("message") String message);
 
+    /*driver_id,lati,lang*/
+    @FormUrlEncoded
+    @POST(Constant.DRIVER_JOB)
+    Call<DeliveryListMainModal> deliveryJobData(@Field("driver_id") String driver_id, @Field("lati") String lati,
+                                                @Field("lang") String lang);
 
 
     @FormUrlEncoded
@@ -58,8 +62,6 @@ public interface RetrofitApiClient {
             @Field("product_details") String product_details);
 
 
-
-
     @Multipart
     @POST(Constant.UPDATE_PROFILE)
     Call<LoginModel> profileimage(@Part("user_id") RequestBody user_id,
@@ -67,11 +69,6 @@ public interface RetrofitApiClient {
                                   @Part("user_name") RequestBody user_name,
                                   @Part("user_dob") RequestBody user_dob,
                                   @Part MultipartBody.Part user_profile_picture);
-
-
-
-
-
 
 
 }

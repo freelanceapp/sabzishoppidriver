@@ -3,6 +3,7 @@ package com.sabzishoppidriverapp.retrofit_provider;
 import android.app.Dialog;
 
 import com.sabzishoppidriverapp.constant.Constant;
+import com.sabzishoppidriverapp.model.delivery_list_modal.DeliveryListMainModal;
 import com.sabzishoppidriverapp.model.login_responce.LoginModel;
 import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 import com.sabzishoppidriverapp.utils.AppProgressDialog;
@@ -107,6 +108,24 @@ public class RetrofitService {
         });
     }
 
+    public static void getDeliveryJobData(final Dialog dialog, final Call<DeliveryListMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
 
+        method.enqueue(new Callback<DeliveryListMainModal>() {
+            @Override
+            public void onResponse(Call<DeliveryListMainModal> call, Response<DeliveryListMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
 
+            @Override
+            public void onFailure(Call<DeliveryListMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
 }

@@ -17,7 +17,6 @@ import com.sabzishoppidriverapp.model.User;
 import com.sabzishoppidriverapp.model.otp_responce.OtpModel;
 import com.sabzishoppidriverapp.retrofit_provider.RetrofitService;
 import com.sabzishoppidriverapp.retrofit_provider.WebResponse;
-import com.sabzishoppidriverapp.ui.map_activity.MapsActivity;
 import com.sabzishoppidriverapp.utils.Alerts;
 import com.sabzishoppidriverapp.utils.AppPreference;
 import com.sabzishoppidriverapp.utils.BaseActivity;
@@ -86,7 +85,6 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
 
     private void otpApi() {
         if (cd.isNetWorkAvailable()) {
-            //strMobile = ((EditText) rootview.findViewById(R.id.et_login_email)).getText().toString();
             strOtp = pinview1.getValue();
 
             RetrofitService.getOtpData(new Dialog(mContext), retrofitApiClient.otpApi(strMobile, strOtp), new WebResponse() {
@@ -104,7 +102,8 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener {
                         String data = gson.toJson(loginModel);
                         AppPreference.setStringPreference(mContext, Constant.User_Data, data);
                         User.setUser(loginModel);
-                        Intent intent = new Intent(mContext, MapsActivity.class);
+                        //Intent intent = new Intent(mContext, MapsActivity.class);
+                        Intent intent = new Intent(mContext, DeliveryListActivity.class);
                         mContext.startActivity(intent);
                         finish();
                     }

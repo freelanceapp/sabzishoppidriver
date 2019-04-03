@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,6 +39,7 @@
             android:hint="Enter Your Mobile Number"
             android:inputType="phone"
             android:padding="10dp"
+            android:text="9897969594"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="14sp"
