@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.activity.LoginActivity">
 
     <LinearLayout
@@ -16,6 +17,11 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="28dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150sp"
+            android:src="@drawable/logo"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -39,7 +45,6 @@
             android:hint="Enter Your Mobile Number"
             android:inputType="phone"
             android:padding="10dp"
-            android:text="9897969594"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="14sp"
