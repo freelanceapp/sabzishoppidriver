@@ -3,23 +3,32 @@ package com.sabziwaladriverapp.ui.map_activity;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,8 +44,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sabziwaladriverapp.R;
+import com.sabziwaladriverapp.adapter.DeliveryListAdapter;
+import com.sabziwaladriverapp.adapter.OrderItemAdapter;
 import com.sabziwaladriverapp.constant.Constant;
 import com.sabziwaladriverapp.model.delivery_list_modal.DeliveryList;
+import com.sabziwaladriverapp.model.delivery_list_modal.DeliveryOrderDetail;
 import com.sabziwaladriverapp.model.driver_update_responce.DriverUpdateModel;
 import com.sabziwaladriverapp.retrofit_provider.RetrofitService;
 import com.sabziwaladriverapp.retrofit_provider.WebResponse;
@@ -81,8 +93,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
 
 
     private String mainUrl = "";
-    private String strDriverId ;
-    private Button btn_cancel, btn_complete;
+    private String strDriverId, strDeliveryId;
+    private Button btn_cancel, btn_complete, btn_order_detail;
+
+
+    BottomSheetBehavior behavior;
+    CoordinatorLayout coordinatorLayout;
+
+    RecyclerView order_item_list;
+    List<DeliveryOrderDetail> orderDetailList = new ArrayList<>();
+    OrderItemAdapter adapter;
+    TextView tv_c_number, tv_c_name;
+    ImageView btn_call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,14 +123,52 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
         dialog = new Dialog(mContext);
         deliveryData = getIntent().getParcelableExtra("delivery_data");
         getLatLong();
-
+        strDeliveryId = deliveryData.getDeliveryId();
         strDriverId = AppPreference.getStringPreference(mContext, Constant.User_Id);
-        driverStatus(strDriverId, "", "0");
+        driverStatus(strDeliveryId, "", "0");
+
+        order_item_list = findViewById(R.id.order_item_list);
+        tv_c_number = findViewById(R.id.tv_c_number);
+        tv_c_name = findViewById(R.id.tv_c_name);
+        btn_call = findViewById(R.id.btn_call);
+
+
+        tv_c_name.setText(deliveryData.getCustomer().getCustomerName());
+        tv_c_number.setText(deliveryData.getCustomer().getCustomerContact());
+
+        orderDetailList.addAll(deliveryData.getOrderDetails());
+
+        endLatitude = Double.parseDouble(deliveryData.getLang());
+        endLongitude = Double.parseDouble(deliveryData.getLati());
+
+        order_item_list.setHasFixedSize(true);
+        order_item_list.setLayoutManager(new LinearLayoutManager(mContext));
+        adapter = new OrderItemAdapter(orderDetailList, mContext, this);
+        order_item_list.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
 
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_complete = findViewById(R.id.btn_complete);
+        btn_order_detail = findViewById(R.id.btn_order_detail);
         btn_cancel.setOnClickListener(this);
         btn_complete.setOnClickListener(this);
+        btn_order_detail.setOnClickListener(this);
+        btn_call.setOnClickListener(this);
     }
 
     @Override
@@ -128,7 +188,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLngPick) {
-
             }
         });
 
@@ -139,8 +198,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
         }
 
         MarkerOptions markerOptions = new MarkerOptions();
-        endLatitude = Double.parseDouble(deliveryData.getLati());
-        endLongitude = Double.parseDouble(deliveryData.getLang());
+
 
         /*endLatitude = 22.7820662;
         endLongitude = 75.8579348;*/
@@ -152,7 +210,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         markerOptions.position(latLngPick);
         //mMap.animateCamera(CameraUpdateFactory.newLatLng(latLngPick));
-        markerOptions.title(deliveryData.getCustomer().getCustomerName() + "\n" + deliveryData.getCustomer().getCustomerContact());
+        markerOptions.title((deliveryData.getDeliveryDistance() / 1000)+"km" );
         mMap.addMarker(markerOptions);
 
         if (startLatitude > 0 && endLatitude > 0) {
@@ -209,13 +267,34 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.btn_cancel:
                 commentDialog(view, "Order Cancel", "3");
                 break;
             case R.id.btn_complete:
                 commentDialog(view, "Order Complete", "2");
+                break;
+
+            case R.id.btn_order_detail:
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+
+            case R.id.btn_call:
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse(deliveryData.getCustomer().getCustomerContact()));
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                startActivity(callIntent);
+
                 break;
         }
     }
@@ -247,7 +326,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
             progressDialog.hide();
             if (result != null) {
                 drawPath(result);
-                driverStatus(strDriverId, "", "1");
+                driverStatus(strDeliveryId, "", "1");
             }
         }
     }
@@ -338,14 +417,13 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
     }
 
 
-    private void driverStatus(String driverId, String comment, String status) {
-        String strId = driverId;
+    private void driverStatus(String strDeliveryId, String comment, final String status) {
+        String strId = strDeliveryId;
         String strComment = comment;
         String strStatus = status;
 
         if (cd.isNetWorkAvailable()) {
-            RetrofitService.driverUpdate(null, retrofitApiClient.driverUpdate(
-                    strId, strComment, strStatus), new WebResponse() {
+            RetrofitService.driverUpdate(null, retrofitApiClient.driverUpdate(strId, strComment, strStatus), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) throws JSONException {
                     AppProgressDialog.hide(dialog);
@@ -353,7 +431,15 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
 
                     if (!driverUpdateModel.getResult())
                     {
-                        Alerts.show(mContext, driverUpdateModel.getMessage());
+                        if (status.equals("2") )
+                        {
+                            finish();
+                        }else if (status.equals("3"))
+                        {
+                            finish();
+                        }else {
+                        }
+
                     }else {
                         Alerts.show(mContext, driverUpdateModel.getMessage());
                     }
@@ -390,8 +476,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Go
             @Override
             public void onClick(View v) {
                 String strComment = etComment.getText().toString();
-                driverStatus(strDriverId, strComment, status);
+                driverStatus(strDeliveryId, strComment, status);
                 dialogPaid.dismiss();
+
             }
         });
 

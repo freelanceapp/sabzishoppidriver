@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="001"
+                android:padding="2sp"
+                android:maxLength="3"
+                android:id="@+id/item_number"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="Apple"
+                android:padding="2sp"
+                android:lines="1"
+                android:id="@+id/item_name"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="15kg"
+                android:padding="2sp"
+                android:id="@+id/item_quantity"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Rs.250"
+                android:padding="2sp"
+                android:id="@+id/item_price"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.6"
+                android:text="Fruit"
+                android:padding="2sp"
+                android:lines="1"
+                android:id="@+id/item_type"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5sp"
+            android:background="@color/gray_c"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

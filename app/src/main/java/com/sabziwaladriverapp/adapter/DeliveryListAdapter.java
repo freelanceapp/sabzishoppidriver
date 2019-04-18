@@ -35,9 +35,9 @@ public class DeliveryListAdapter extends RecyclerView.Adapter<DeliveryListAdapte
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.txtOrderNumber.setText(itemsDataList.get(position).getOrderNumber());
         holder.txtHouseNo.setText(itemsDataList.get(position).getSippingHouseNumber());
-        holder.txtDistance.setText(itemsDataList.get(position).getDeliveryDistance() + "");
+        holder.txtDistance.setText((itemsDataList.get(position).getDeliveryDistance()/1000) + " km");
         holder.txtLandmark.setText(itemsDataList.get(position).getShippingLandmark());
-        holder.txtAddress.setText(itemsDataList.get(position).getAddressType());
+        holder.txtAddress.setText(itemsDataList.get(position).getLocation());
         holder.txtPaymentType.setText(itemsDataList.get(position).getPaymentType());
         holder.txtAmount.setText("Rs." + itemsDataList.get(position).getAmount());
 

@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdkVersion 28
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.sabzishoppidriverapp"
+        applicationId "com.sabziwaladriverapp"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
@@ -44,5 +43,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
 
+    implementation 'com.github.florent37:viewtooltip:1.1.8'
 }

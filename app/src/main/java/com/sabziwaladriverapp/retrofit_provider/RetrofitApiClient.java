@@ -6,6 +6,7 @@ import com.sabziwaladriverapp.model.delivery_list_modal.DeliveryListMainModal;
 import com.sabziwaladriverapp.model.driver_update_responce.DriverUpdateModel;
 import com.sabziwaladriverapp.model.login_responce.LoginModel;
 import com.sabziwaladriverapp.model.otp_responce.OtpModel;
+import com.sabziwaladriverapp.model.signup_responce.SignUpModel;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -62,6 +63,12 @@ public interface RetrofitApiClient {
             @Field("zip_code") String zip_code,
             @Field("product_details") String product_details);
 
+    @FormUrlEncoded
+    @POST(Constant.TOKEN_UPDATE)
+    Call<SignUpModel> updateToken(@Field("user_id") String user_id,
+                                  @Field("token") String token,
+                                  @Field("user_ip") String user_ip,
+                                  @Field("type") String type);
 
     @Multipart
     @POST(Constant.UPDATE_PROFILE)

@@ -12,10 +12,12 @@ public class Constant {
     public static final String UPDATE_PROFILE = "api/user-profile-update.php";
     public static final String DRIVER_JOB = "api/select-driver-job.php";
     public static final String DRIVER_UPDATE = "api/update-driver-job.php";
+    public static final String TOKEN_UPDATE = "api/app_token.php";
 
     /*Preference*/
     public static final String Is_Login = "Is_Login";
     public static final String User_Id = "User_Id";
     public static final String User_Data = "User_Data";
+    public static final String DEVICE_TOKEN = "DEVICE_TOKEN";
 
 }

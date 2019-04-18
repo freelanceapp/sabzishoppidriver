@@ -170,11 +170,11 @@
 
             <ImageView
                 android:id="@+id/imgNext"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_chevron_right" />
+                android:src="@drawable/ic_map" />
 
             <TextView
                 android:id="@+id/txtAmountLbl"

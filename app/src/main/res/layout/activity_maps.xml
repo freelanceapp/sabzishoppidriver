@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/coordinatorLayout"
     tools:context=".ui.map_activity.MapsActivity">
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -19,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
+        android:weightSum="3"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10sp">
         <Button
@@ -36,11 +40,158 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Order Detail"
+            android:background="@drawable/bg_layout5"
+            android:textColor="@color/yellow_900"
+            android:layout_margin="4sp"
+            android:id="@+id/btn_order_detail"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="cancel"
             android:background="@drawable/bg_layout2"
             android:textColor="@color/red_a"
             android:layout_margin="4sp"
             android:id="@+id/btn_cancel"/>
     </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:id="@+id/bottom_sheet"
+        android:background="@android:color/white"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        tools:ignore="MissingPrefix">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Product Detail"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:padding="6sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Customer Name"
+            android:padding="2dp"
+            android:textSize="16sp"
+            android:id="@+id/tv_c_name"
+            android:textColor="@color/black"
+            android:layout_margin="4sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Mobile Number"
+                android:padding="2dp"
+                android:textSize="14sp"
+                android:id="@+id/tv_c_number"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/phone_call"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10sp"
+                android:id="@+id/btn_call"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5sp"
+            android:background="@color/gray_c"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4sp"
+                android:paddingBottom="4sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No."
+                    android:padding="2sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/item_number"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Name"
+                    android:padding="2sp"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:id="@+id/item_name"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Qut."
+                    android:lines="1"
+                    android:padding="2sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/item_quantity"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="price"
+                    android:padding="2sp"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:id="@+id/item_price"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:text="type"
+                    android:padding="2sp"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:id="@+id/item_type"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height=".5sp"
+                android:background="@color/gray_c"/>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/order_item_list"
+            android:layout_marginBottom="6sp"/>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

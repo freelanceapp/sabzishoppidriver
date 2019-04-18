@@ -7,6 +7,7 @@ import com.sabziwaladriverapp.model.delivery_list_modal.DeliveryListMainModal;
 import com.sabziwaladriverapp.model.driver_update_responce.DriverUpdateModel;
 import com.sabziwaladriverapp.model.login_responce.LoginModel;
 import com.sabziwaladriverapp.model.otp_responce.OtpModel;
+import com.sabziwaladriverapp.model.signup_responce.SignUpModel;
 import com.sabziwaladriverapp.utils.AppProgressDialog;
 
 import retrofit2.Call;
@@ -144,6 +145,27 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<DriverUpdateModel> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getSignData(final Dialog dialog, final Call<SignUpModel> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<SignUpModel>() {
+            @Override
+            public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<SignUpModel> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());
