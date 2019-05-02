@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Sabziwala Driver</string>
+    <string name="app_name">Pahadi Sabziwala Driver</string>
 
-    <string name="map_api">AIzaSyBwhwpxhz_rq-Qe9JnHgpxvM-ujbkrvDn4</string>
+    <string name="map_api">AIzaSyBa1HMlDGdNkRgqQJaw6BvjxWLy_0cK6Oc</string>
 
     <string name="connection">no internet</string>
     <string name="title_activity_map_tracking">Map Route Tracking</string>

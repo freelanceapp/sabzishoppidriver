@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sabziwaladriverapp">
+    package="com.pahadisabzidriver1">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -16,16 +16,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/app_logo"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/app_logo"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.sabziwaladriverapp.ui.map_activity.MapsActivity" />
+        <activity android:name="com.pahadisabzidriver1.ui.map_activity.MapsActivity"
+            android:theme="@style/AppTheme.Base"/>
         <activity
-            android:name="com.sabziwaladriverapp.ui.activity.SplashActivity"
+            android:name="com.pahadisabzidriver1.ui.activity.SplashActivity"
             android:theme="@style/AppTheme.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,21 +34,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sabziwaladriverapp.ui.activity.OtpActivity" />
-        <activity android:name="com.sabziwaladriverapp.ui.activity.LoginActivity" />
-        <activity android:name="com.sabziwaladriverapp.ui.activity.MainActivity" />
+        <activity android:name="com.pahadisabzidriver1.ui.activity.OtpActivity"
+            android:theme="@style/AppTheme.Base"/>
+        <activity android:name="com.pahadisabzidriver1.ui.activity.LoginActivity"
+            android:theme="@style/AppTheme.Base"/>
+        <activity android:name="com.pahadisabzidriver1.ui.activity.MainActivity" />
         <activity
-            android:name="com.sabziwaladriverapp.ui.activity.DeliveryListActivity"
+            android:name="com.pahadisabzidriver1.ui.activity.DeliveryListActivity"
             android:label="Job list"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-        <service android:name=".notification.MyFirebaseMessagingService">
+        <service android:name="com.pahadisabzidriver1.notification.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".notification.FirebaseIDService">
+        <service android:name="com.pahadisabzidriver1.notification.FirebaseIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

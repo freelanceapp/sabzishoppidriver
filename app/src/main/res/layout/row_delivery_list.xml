@@ -102,22 +102,60 @@
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Landmark:"
-                android:textAllCaps="true"
-                android:textColor="@color/text_color_e"
-                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/txtLandmark"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Near Tulsi tower"
-                android:textColor="@color/text_color_c"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Landmark:"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_color_e"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/txtLandmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Near Tulsi tower"
+                        android:textColor="@color/text_color_c"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Delivery Time"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_color_e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Near Tulsi tower"
+                        android:textColor="@color/text_color_c"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
